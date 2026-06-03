@@ -1,0 +1,24 @@
+{
+  "name": "defi-builder-skills",
+  "owner": {
+    "name": "Gil Lopes Bueno",
+    "email": "gilbueno.mail@gmail.com",
+    "url": "https://github.com/melanke"
+  },
+  "metadata": {
+    "version": "1.0.0",
+    "description": "Skills for designing and building DeFi protocols from scratch"
+  },
+  "plugins": [
+    {
+      "name": "defi-spec-driven",
+      "version": "1.0.0",
+      "description": "Six-phase DeFi protocol specification before any Solidity, then per-function implementation tracked against the spec.",
+      "author": {
+        "name": "Gil Lopes Bueno",
+        "url": "https://github.com/melanke"
+      },
+      "source": "./plugins/defi-spec-driven"
+    }
+  ]
+}

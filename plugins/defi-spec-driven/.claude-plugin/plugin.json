@@ -1,0 +1,9 @@
+{
+  "name": "defi-spec-driven",
+  "version": "1.0.0",
+  "description": "Six-phase DeFi protocol specification before any Solidity, then per-function implementation tracked against the spec.",
+  "author": {
+    "name": "Gil Lopes Bueno",
+    "url": "https://github.com/melanke"
+  }
+}
