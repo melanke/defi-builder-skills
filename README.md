@@ -13,7 +13,7 @@ Runs a structured process from idea to auditable implementation:
 5. **Phase 4 — Threat Modeling** — per-function attack vectors and mitigations
 6. **Phase 5 — Interface, Storage & Events** — REQ-* slugs, storage layout, events, errors
 7. **Phase 6 — Test Specification** — fuzz targets, attack scenarios, unit test specs
-8. **Project Setup** — bootstraps a Foundry project from `melanke/foundry-security-template`, bridges the spec into the project structure
+8. **Project Setup** — bootstraps a Foundry project from [`melanke/foundry-security-template`](https://github.com/melanke/foundry-security-template), bridges the spec into the project structure
 9. **Implementation** — per-function execute loop (implement → test → gate → commit), with two audit passes per contract
 
 ## Scope limitation: greenfield only
