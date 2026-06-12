@@ -35,11 +35,11 @@ Phase: [current phase]
 [DEC-2]: ...
 
 ## Expansion Queue
-- [item] — queued from Phase [N]
+- [description] — queued from Phase [N] [→ OQ-N if dual-logged, omit if pure tangent]
 
 ## Pivot Log
 [Only if a pivot occurred from Phase 2 onward]
-- Phase [N] pivot: [what changed and why]
+- Phase [N] pivot | DEC-[ref]: [decision reference] | From: [prior direction] | To: [new direction] | Reason: [why] | Files superseded: [list or "none"]
 ```
 
 ## Updating STATE.md
@@ -50,8 +50,8 @@ Phase: [current phase]
 - **Decision made**: add to Decisions with rationale
 - **Phase boundary reached**: check off phase in Phase History, update current phase
 - **Tangent parked**: add to Expansion Queue
-- **OQ resolved**: update status to CLOSED, add resolution note
-- **Pivot from Phase 2+**: add to Pivot Log with rationale
+- **OQ resolved**: update status to CLOSED, add resolution note; remove or strike the corresponding Expansion Queue entry if one exists
+- **Pivot from Phase 2+**: add to Pivot Log with all six required fields (phase, DEC ref, from, to, reason, files superseded)
 
 ### Open Question lifecycle
 
@@ -62,13 +62,17 @@ OPEN → (unresolvable) → ACCEPTED-AMBIGUITY [assumption made, risk level: low
 
 No OQ survives Phase 6 as silently OPEN. Every one must be CLOSED or ACCEPTED-AMBIGUITY before the go/no-go verdict is written.
 
-### OQ and Expansion Queue overlap
+**OQ numbering**: OQ numbers are globally sequential across the entire session. The next OQ number is always max(existing OQ numbers) + 1, regardless of which phase creates it. Never reuse a number.
+
+### Dual-Logging Rule (OQ and Expansion Queue overlap)
 
 Some items are simultaneously a question that can't be answered yet AND one that could invalidate a future phase decision. Both roles can coexist.
 
 Rule: if an item can't be resolved now but would block a future phase:
 1. Log it as an OQ with its blocking phase — e.g., `[OQ-3]: Can the mechanism work at <$1M TVL? | Blocking phase: 3`
 2. Also add it to the Expansion Queue so it surfaces for active resolution, not only at the gate
+
+The OQ entry is the question form ("Can X happen?") tagged with its blocking phase. The Expansion Queue entry is the action form ("Resolve X before Phase N begins"). They are two views of the same item, not two separate items.
 
 If the item can invalidate the *current* decision: address it immediately (Interaction Principle #7 — exception to queuing). If it can only invalidate a *future* decision: dual-log and continue.
 

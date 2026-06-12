@@ -45,6 +45,8 @@ Most protocols have a mix, but one variable dominates. Identify it before buildi
 
 Diagnostic: calculate revenue at three rate levels (current rate, 50% compressed, near-zero) at constant TVL. If the difference across rate scenarios exceeds the difference across TVL scenarios, the protocol is rate-driven and Step 3 must vary rates independently.
 
+Record the classification and diagnostic basis in the Primary Revenue Variable section of ECONOMICS.md before proceeding to Step 2.
+
 ---
 
 ## Step 2 — Revenue model
@@ -58,9 +60,13 @@ For each revenue stream identified in the canvas:
 
 Calculate breakeven: *"At what TVL/volume does protocol fee revenue cover protocol operating costs (oracles, keepers, audits)?"* This is the minimum viable scale.
 
+If Phase 3 produced a provisional break-even TVL estimate (in CANVAS.md or as an OQ), compare it to this result. If they agree within 20%, close the Phase 3 OQ. If they differ by more than 20%, log the discrepancy and its cause in STATE.md, update CANVAS.md's Liquidity Bootstrapping field with the Phase 4 figure, and note that the Phase 4 number is authoritative. The Phase 3 figure is a pre-check; Phase 4 is the binding calculation.
+
 ---
 
 ## Step 3 — TVL scenario analysis
+
+Before building scenarios: check STATE.md for the note "Phase 3 should apply the bifurcated v1/v2 pattern" and any canvas confirmation that v1 → v2 requires user re-acquisition. If re-acquisition is confirmed, run the TVL scenario table twice — once for v1 and once for v2 as independent bootstrapping events. Do not aggregate v1 and v2 TVL; v2 bootstrapping starts from zero when re-acquisition is required. Label the two tables clearly. If the v1/v2 note is absent, proceed with a single table.
 
 Build three TVL scenarios: bear, base, and bull. For each scenario, project:
 
@@ -138,18 +144,28 @@ If no token: note whether a token is planned and when, or confirm it's intention
 
 **Yield sustainability statement**: [one honest paragraph]
 
+## Primary Revenue Variable
+- Classification: [TVL-driven / volume-driven / rate-driven]
+- Dominant driver: [fee rate × TVL / fee rate × volume / spread × TVL]
+- Diagnostic basis: [e.g., "rate scenario spread = $X, TVL scenario spread = $Y → rate-driven"]
+- Scenario axis used in Step 3: [TVL axis / volume axis / 2×3 rate×TVL matrix]
+
 ## Revenue Model
 | Stream | Fee structure | Protocol capture | Breakeven TVL/volume |
 |---|---|---|---|
 
 ## TVL Scenarios
+<!-- If v1/v2 re-acquisition confirmed in STATE.md: duplicate this table for v1 and v2 as separate events -->
 | Scenario | 6mo TVL | 12mo TVL | 24mo TVL | Revenue | Costs | Net |
 |---|---|---|---|---|---|---|
 | Bear | | | | | | |
 | Base | | | | | | |
 | Bull | | | | | | |
 
-**Bear case survival**: [does the protocol survive? what kills it if not?]
+**Bear case survival**:
+- Verdict: [SURVIVES / DOES NOT SURVIVE]
+- Kill condition (if applicable): [what ends the protocol — e.g., treasury exhausted at month N when TVL < $X]
+- Kill condition status: [ADDRESSED (describe fix) / ACCEPTED-RISK (log as RISK-* for Phase 5)]
 
 ## Unit Economics
 - Revenue per $1M TVL (current fees): $[X]
@@ -181,7 +197,7 @@ If no token: note whether a token is planned and when, or confirm it's intention
 Gate check:
 
 1. Is every yield source classified as real, inflationary, or finite — and is there a sustainability path? If not, stay.
-2. Does the protocol survive the bear scenario? If not, stay until the kill condition is addressed or explicitly accepted.
+2. Does the protocol survive the bear scenario? If not, stay until the kill condition is addressed or recorded as ACCEPTED-RISK with a `RISK-*` slug logged in STATE.md for Phase 5.
 3. Is the bootstrapping cost realistic against available resources? If not, stay.
 4. Is any circular token dependency identified and logged? If yes, ensure it's queued for Phase 5.
 

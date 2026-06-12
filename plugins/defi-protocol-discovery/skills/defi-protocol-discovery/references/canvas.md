@@ -126,7 +126,9 @@ One short paragraph. Forces clarity on: does this need a token? Is it a public g
 
 ## Bifurcated v1/v2 pattern
 
-Some protocol mechanisms depend on ecosystem preconditions that don't yet exist at full adoption — Uniswap V4 hooks at meaningful liquidity depth, EigenLayer restaking at scale, account abstraction wallet penetration above a useful threshold. When the Phase 1 mechanism sketch included such a precondition, the canvas cannot be filled as a single product.
+Some protocol mechanisms depend on ecosystem preconditions that don't yet exist at full adoption — Uniswap V4 hooks at meaningful liquidity depth, EigenLayer restaking at scale, account abstraction wallet penetration above a useful threshold.
+
+Check STATE.md before filling the canvas. If STATE.md contains the note *"Phase 3 should apply the bifurcated v1/v2 pattern"* — whether it was added in Phase 1 or first added at the landscape gate — the canvas cannot be filled as a single product; apply the split below. If that note is absent (including if it was present in Phase 1 but cleared at the landscape gate because the precondition is already met), skip this section entirely.
 
 Apply the v1/v2 split explicitly when this applies:
 
@@ -139,7 +141,7 @@ Fill the UVP, Unique Mechanism, and Revenue Streams canvas fields twice — once
 **Required questions when applying this pattern**:
 1. *Does v1 generate enough value to bootstrap liquidity independently of v2's mechanism?* If no, surface the precondition timeline as a viability question, not a background assumption.
 2. *What's the realistic adoption timeline for the precondition?* If this can't be estimated from on-chain data or protocol roadmaps, log as an OQ.
-3. *Is the v1 → v2 transition a migration the user will make, or will they need to be re-acquired?* If re-acquisition is required, v1 TVL does not transfer — model v1 and v2 as separate bootstrapping events and price each separately. When re-acquisition is confirmed, the Liquidity Bootstrapping canvas field must contain estimates for both v1 and v2 as separate events. A v2 estimate can be order-of-magnitude at this stage — what matters is that it is present. A canvas showing only v1 bootstrapping when re-acquisition is confirmed produces a systematically underestimated capital requirement, and the Phase 3 gate cannot confirm a credible bootstrapping strategy.
+3. *Is the v1 → v2 transition a migration the user will make, or will they need to be re-acquired?* If re-acquisition is required, v1 TVL does not transfer — model v1 and v2 as separate bootstrapping events and price each separately. When re-acquisition is confirmed, the Liquidity Bootstrapping canvas field must contain estimates for both v1 and v2 as separate events. A v2 estimate can be order-of-magnitude at this stage — what matters is that it is present. A canvas showing only v1 bootstrapping when re-acquisition is confirmed produces a systematically underestimated capital requirement, and the Phase 3 gate cannot confirm a credible bootstrapping strategy. When re-acquisition is confirmed, also log to STATE.md: `v1→v2 re-acquisition required` — Phase 4 (economics.md) reads this flag to determine whether to run separate TVL scenario tables for v1 and v2.
 
 If the protocol has no precondition dependency, skip this section entirely.
 
@@ -208,6 +210,8 @@ Gate check:
 1. Are all 11 fields filled — or explicitly flagged as open questions? If a field can't be filled, that's allowed, but it must be an OQ, not a blank.
 2. Is there at least one sustainable revenue stream (independent of token emissions)? If not, log as OQ and note the risk.
 3. Is the UVP distinct on at least two dimensions from the differentiation map? If not, stay.
-4. Is the bootstrapping strategy credible (not "we'll figure it out later")? If not, stay.
+4. Is the bootstrapping strategy credible (not "we'll figure it out later")? Required sub-checks:
+   (a) Is the minimum viable TVL estimated and filled in the canvas? If not, stay.
+   (b) If the mechanism is token emissions only: is there at least an order-of-magnitude estimate of TVL decay when emissions end, based on a Phase 2 analogue? If no analogue was identified and no decay estimate exists, flag as OQ blocking Phase 4 and stay. A plan that names token emissions but does not address post-emissions TVL retention defers the hardest question to Phase 4 without giving Phase 4 any inputs to work from — that is not credible.
 
 When satisfied: *"Canvas closed. Moving to Phase 4 — Economic Viability, where we stress-test the revenue model and TVL scenarios."*

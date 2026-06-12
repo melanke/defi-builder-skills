@@ -61,7 +61,7 @@ At initialization, detect the user's starting profile from their first message a
 **Profile C — Open exploration**: User wants to build in DeFi but has no direction.
 → Run Phase 0 in *open mode* (systematic opportunity scan). Load [opportunity-discovery.md](references/opportunity-discovery.md).
 
-One opening question reveals the profile: *"Tell me about what you want to build — or about where you're thinking of building, if you don't have a specific idea yet."*
+If the first message already clearly places the developer in Profile A, B, or C — route immediately without asking. If the first message doesn't contain enough signal to classify the profile, ask: *"Tell me about what you want to build — or about where you're thinking of building, if you don't have a specific idea yet."*
 
 ## Phase Overview
 
@@ -76,6 +76,10 @@ One opening question reveals the profile: *"Tell me about what you want to build
 | 6 | Go / No-Go | Always | [decision.md](references/decision.md) | `DECISION.md` |
 
 **Pivot discipline**: Phases 0 and 1 are pivot-friendly — looping back carries no cost and no logging requirement. From Phase 2 onward, pivoting requires an explicit decision recorded in STATE.md with the reason. Don't silently restart; document the change and continue forward.
+
+Note: required phase outputs (files, gate items) are not pivots. If a developer tries to advance without completing a required output, complete the output before advancing — do not ask permission. Reserve pivot logging for concept direction changes, not for incomplete deliverables.
+
+STATE.md is created at initialization using the template in [state-management.md](references/state-management.md). Load state-management.md at initialization to create STATE.md from the template, then keep it loaded for all STATE.md updates throughout the session.
 
 ## Project File Structure
 
@@ -135,7 +139,7 @@ These apply every turn, regardless of phase.
 
 ### 1. Defer out-of-phase questions
 
-When a developer raises a question belonging to a future phase: (1) acknowledge briefly and name which phase addresses it, (2) register in STATE.md as `QUEUED [Phase N]: [description]`, (3) redirect back immediately.
+When a developer raises a question belonging to a future phase: (1) acknowledge briefly and name which phase addresses it, (2) add to the Expansion Queue in STATE.md as `- [description] — queued from Phase [N]` (and dual-log as `OQ-N blocking Phase N` if it is also a blocking question), (3) redirect back immediately.
 
 Phase reference — what belongs where:
 - **Phase 0**: opportunity space, problem areas worth exploring, market gaps
@@ -201,6 +205,20 @@ Files created this phase:
 Done when verified:
 - [x] item 1 — confirmed: /path/to/file.md exists, first heading: "..."
 - [ ] item 2 — NOT done → completing now before advancing
+- [ ] pivot check — if concept direction changed this phase: Pivot Log entry in STATE.md with all six fields? If no pivot occurred: N/A
+```
+
+Phase 2 checkpoint example:
+```
+CHECKPOINT — Phase 2 complete
+Files created this phase:
+- .discovery/landscape/LANDSCAPE.md
+Done when verified:
+- [x] file exists — first heading: "# Competitive Landscape"
+- [x] analogue analysis — at least 1 entry with Mechanism + Transferable insight fields
+- [x] antilog analysis — at least 1 entry with "What broke" field; web search result noted
+- [x] early adopters — at least 1 named protocol with all four fields (Name, Current pain, Current workaround, Adoption signal)
+- [x] differentiation map — table present AND 2D positioning statement paragraph follows
 ```
 
 Do not load the next phase reference until every item is `[x]`.
@@ -231,11 +249,12 @@ An unresolved ambiguity in the economic model becomes an implicit assumption in 
 
 ### Protocol Brief format
 
-The Protocol Brief in DECISION.md (produced only on a go verdict) contains exactly:
+The Protocol Brief in DECISION.md (produced on a GO or CONDITIONAL GO verdict) contains exactly:
 1. Protocol name and category
 2. Problem statement (from PROBLEM.md, one paragraph)
 3. Target segment and early adopters
-4. Core value proposition and unique mechanism
-5. Economic model summary (revenue source, fee structure, TVL path)
-6. Open assumptions still requiring validation post-launch
-7. Handoff note: *"Start defi-spec-driven with: [one sentence framing for the init prompt]"*
+4. Regulatory status (CLEAR / REQUIRES CONSULTATION / TBD pending legal opinion on (specific question))
+5. Core value proposition and unique mechanism
+6. Economic model summary (revenue source, fee structure, TVL path)
+7. Open assumptions still requiring validation post-launch
+8. Handoff note: *"Start defi-spec-driven with: [one sentence framing for the init prompt]"*
